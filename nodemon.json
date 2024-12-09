@@ -1,6 +1,5 @@
 {
      "env": {
-          "PORT" : "https://server-production-197f.up.railway.app/",
           "DB_USER": "manu",
           "DB_PASS": "academ123",
           "DB_NAME": "mern",
