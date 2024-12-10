@@ -32,10 +32,12 @@ app.use('/api/places', placesRoutes); //Any request to paths starting with /api/
 
 app.use('/api/users', usersRoutes); //Any request to paths starting with /api/users will be handle in placeRoutes
 
-app.use((res, req, next) => {   //Handling error for unsupported routes
-    const error = new HttpError('Could not find this routes', 404);
-    throw error;
-});
+
+
+// app.use((res, req, next) => {   //Handling error for unsupported routes
+//     const error = new HttpError('Could not find this routes', 404);
+//     throw error;
+// });
 
 app.use((error, req, res, next) => { //Error handler
 

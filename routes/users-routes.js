@@ -11,7 +11,7 @@ router.get('/', usersControllers.getUsers);
 
 //Define a POST route that create a new user & log the user in
 router.post('/signup',  
-    fileUpload.single('image'),     //to upload an image of the user
+   fileUpload.single('image'),     //to upload an image of the user
     [check('name')      //Validate that the name is not empty, email is in a valid format and password is at least 5 characters long
         .not()
         .isEmpty(),

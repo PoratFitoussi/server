@@ -17,11 +17,11 @@ router.use(checkToken);
 
 //Define a POST route that create a new place on the db
 router.post('/',   
-    fileUpload.single('image'),  //to upload an image for the place
+   fileUpload.single('image'),  //to upload an image for the place
     [check('title')  //Validate that the title and the address is not empty, and the description is at least 5 characters long
         .not()
         .isEmpty(),
-    check('description').isLength({ min: 5 }),
+    check('description').isLength({ min: 6 }),
     check('address')
         .not()
         .isEmpty()
