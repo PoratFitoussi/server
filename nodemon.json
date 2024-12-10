@@ -3,7 +3,7 @@
           "DB_USER": "manu",
           "DB_PASS": "academ123",
           "DB_NAME": "mern",
-          "API_KEY": "",
+          "API_KEY": "AIzaSyAjDPRyeU0SbapIB3occX6KF3oVEf550CY",
           "SECRET_KEY": "the_most_super_duper_secret_key"
      }
 }
