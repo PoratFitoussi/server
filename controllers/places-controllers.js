@@ -37,16 +37,11 @@ const getPlacesByUserId = async (req, res, next) => {
     } catch (err) { //in case of an error
         console.log(err);
         return next(
-            new HttpError(
-                'Something went worng during the search',
-                500
-            )
-        );
+            new HttpError('Something went worng during the search', 500));
     }
 
     if (!userWithPlaces) { //in case there is'nt place with the pid 
-        const error = new HttpError('Currently, there are no shared places from this user.', 404); //create an error object that send to the error handler
-        return next(error);
+        return next(new HttpError('Currently, there are no shared places from this user.', 404));  //create an error object that send to the error handler
     }
     res.json({ place: userWithPlaces.places.map(place => place.toObject({ getters: true })) });   //send a respond that all the documents look as array
 };
@@ -58,14 +53,14 @@ const createPlace = async (req, res, next) => {
         next(new HttpError('Invalid input passed, please check your data', 422));
     }
 
-    const { title, description, address} = req.body;    //Resive the property the of the user from the body of the url requst
+    const { title, description, address } = req.body;    //Resive the property the of the user from the body of the url requst
 
     //Put the coordinates of the place by his address
     let coordinates;
     try {
         coordinates = await getCoordsForAddress(address);
     } catch (error) {
-        return next(new HttpError('Can not read the coordinates',422));
+        return next(new HttpError('Can not read the coordinates', 422));
     }
 
     //A model for the documents 'place'
@@ -98,11 +93,7 @@ const createPlace = async (req, res, next) => {
         await user.save({ session: sess }); //Set the session filed of the user document to the sseion we just create 
         await sess.commitTransaction(); //Confirm all the change that been made by confirm the transaction
     } catch (err) {
-        const error = new HttpError(
-            'Creating place failed, please try againg',
-            500
-        );
-        return next(error);
+        return next(new HttpError('Creating place failed, please try againg', 500));
     }
 
     res.status(201).json({ place: newPlace });    //send a responed that the object was curecly added
@@ -121,7 +112,7 @@ const updatePlace = async (req, res, next) => {
     //Find the place by it's id
     let place;
     try {
-        place = await Place.findById(placeId); 
+        place = await Place.findById(placeId);
     } catch (err) {
         return next(new HttpError('Something went worng, could not find the place', 500));
     }
@@ -159,7 +150,7 @@ const deletePlace = async (req, res, next) => {
         return next(new HttpError('Could not find a place for that id.', 404));  //in case the user didn't give a valid id
     }
 
-    if(place.creator.id !== req.userData.userId){
+    if (place.creator.id !== req.userData.userId) {
         return next(new HttpError('Could not delete that place, you are not the creator', 401))
     }
 

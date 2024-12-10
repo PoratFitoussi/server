@@ -48,7 +48,7 @@ app.use((error, req, res, next) => { //Error handler
         return next(error);
 
     res.status(error.code || 500) //in case there isnt error send by the user
-    res.json({ message: error.message || 'unknow error occurred!' }) //check if we have a message on the error object
+    res.json({ message: 'unknow error occurred!' }) //check if we have a message on the error object
 })
 
 mongoose
