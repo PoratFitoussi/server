@@ -47,8 +47,8 @@ app.use((error, req, res, next) => { //Error handler
     if (res.headerSent) //check if a respond has already send
         return next(error);
 
-    res.status(500) //in case there isnt error send by the user
-    res.json({ message: 'unknow error occurred!' }) //check if we have a message on the error object
+    res.status(error.code) //in case there isnt error send by the user
+    res.json({ message: error.message}) //check if we have a message on the error object
 })
 
 mongoose
