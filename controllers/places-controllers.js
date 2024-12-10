@@ -65,7 +65,7 @@ const createPlace = async (req, res, next) => {
     try {
         coordinates = await getCoordsForAddress(address);
     } catch (error) {
-        return next(new HttpError('Can not read the corrdinates',422));
+        return next(new HttpError('Can not read the coordinates',422));
     }
 
     //A model for the documents 'place'
